@@ -457,8 +457,8 @@ _def("m_src_h", "Data sources", "数据来源")
 _def("m_src",
      "All data come from public GEO series (PMID and GEO links for each series are on the "
      "\u2018Cohorts &amp; datasets\u2019 page); the curation and reanalysis reports plus this site\u2019s "
-     "build scripts are public with the code repository, so every number is reproducible. Code: <a href=\"https://github.com/yuye8848/polypatlas\">github.com/yuye8848/polypatlas</a> \u00b7 Data archive: <a href=\"https://doi.org/10.5281/zenodo.23448779\">Zenodo DOI 10.5281/zenodo.23448779</a>.",
-     "全部来自 GEO 公开系列（各系列 PMID 与 GEO 链接见“队列与数据集”页）；策展报告、重分析报告与本网站构建脚本随代码仓库公开，全部数字可复现。代码仓库：<a href=\"https://github.com/yuye8848/polypatlas\">github.com/yuye8848/polypatlas</a> · 数据存档：<a href=\"https://doi.org/10.5281/zenodo.23448779\">Zenodo DOI 10.5281/zenodo.23448779</a>。")
+     "build scripts are public with the code repository, so every number is reproducible. Code: <a href=\"https://github.com/polypatlas/polypatlas\">github.com/polypatlas/polypatlas</a> \u00b7 Data archive: <a href=\"https://doi.org/10.5281/zenodo.23448779\">Zenodo DOI 10.5281/zenodo.23448779</a>.",
+     "全部来自 GEO 公开系列（各系列 PMID 与 GEO 链接见“队列与数据集”页）；策展报告、重分析报告与本网站构建脚本随代码仓库公开，全部数字可复现。代码仓库：<a href=\"https://github.com/polypatlas/polypatlas\">github.com/polypatlas/polypatlas</a> · 数据存档：<a href=\"https://doi.org/10.5281/zenodo.23448779\">Zenodo DOI 10.5281/zenodo.23448779</a>。")
 _def("m_auth_h", "Authors &amp; contact", "作者与联系")
 _def("m_auth",
      "Authors: Peiliang Lei \u00b7 Corresponding: Peiliang Lei (of@live.com) \u00b7 Cite this resource: Lei P. PolypAtlas: a harmonised multi-modal transcriptomic resource integrating public bulk, single-cell and spatial transcriptomic data of chronic rhinosinusitis with nasal polyps. https://polyp.erbihou.org/ (data archive: Zenodo, DOI 10.5281/zenodo.23448779)",
