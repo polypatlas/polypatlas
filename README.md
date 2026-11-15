@@ -1,10 +1,10 @@
 # PolypAtlas — CRSwNP Multi-modal Transcriptomic Resource
 
+**English** | [简体中文](README.zh-CN.md)
+
 **Live resource: https://polyp.erbihou.org/**
 
 PolypAtlas is a curated, harmonized multi-modal transcriptomic resource for chronic rhinosinusitis with nasal polyps (CRSwNP), built entirely from public data. It integrates the public human CRS / nasal-polyp transcriptomic datasets catalogued on GEO (66 series curated; 32 core datasets), spanning bulk transcriptomics, single-cell RNA-seq and spatial transcriptomics, reprocessed under one uniform pipeline so that any gene can be compared across cohorts, cell types and tissue compartments.
-
-鼻息肉（CRSwNP）多模态转录组公共数据资源：策展 GEO 全部 66 个人类 CRS/鼻息肉系列，统一流程重处理 bulk、单细胞与空间转录组，支持按基因跨队列、跨细胞类型、跨组织区室查询。网站为中英双语，默认英文。
 
 ## Contents
 
