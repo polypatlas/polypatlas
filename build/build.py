@@ -23,7 +23,7 @@ from datetime import date
 BASE = os.path.dirname(os.path.abspath(__file__))
 PROJ = os.path.dirname(os.path.dirname(BASE))  # ~/workspace/sci-crswnp-resource
 SITE = os.path.join(PROJ, "web", "site")
-VERSION = "v1.5"
+VERSION = "v1.6"
 BUILD_DATE = date.today().isoformat()
 
 # ================= i18n string registry: key -> (en, zh) =================
@@ -222,11 +222,11 @@ _dl = [
      "Consensus genes: pathway enrichment of the up/down lists.",
      "共识基因：上下调清单的通路富集。"),
     ("dl8_lr1",
-     "Cell\u2013cell communication (CellChat, GSE235711): CRSwNP vs control interaction comparison.",
-     "细胞间通讯（CellChat，GSE235711）：CRSwNP vs 对照互作比较。"),
+     "Cell\u2013cell communication (CellChat, GSE235711; library-size normalised, release v1.6): CRSwNP vs control interaction comparison.",
+     "细胞间通讯（CellChat，GSE235711；文库大小归一化，v1.6 版）：CRSwNP vs 对照互作比较。"),
     ("dl8_lr2",
-     "Cell\u2013cell communication (CellChat, GSE235711): CRSsNP vs control interaction comparison.",
-     "细胞间通讯（CellChat，GSE235711）：CRSsNP vs 对照互作比较。"),
+     "Cell\u2013cell communication (CellChat, GSE235711; library-size normalised, release v1.6): CRSsNP vs control interaction comparison.",
+     "细胞间通讯（CellChat，GSE235711；文库大小归一化，v1.6 版）：CRSsNP vs 对照互作比较。"),
 ]
 for _k, _e, _z in _dl:
     _def(_k, _e, _z)
@@ -285,6 +285,19 @@ _def("gpw_ncol", "contrasts", "对比数")
 
 # --- v1.3: step-9 added-value layers (F1/F4/F3/F6) ---
 _def("nav_treatment", "Treatment response", "治疗反应")
+_def("dl_audit",
+     "Reproduction audit (release v1.6): 85 rows \u2014 every extracted claim with its grade, the claimed proposition, the measured quantity and their match.",
+     "复现审计（v1.6）：85 行——每条提取声称及其判级、原命题、实际量测与命题匹配。")
+_def("dl_strict",
+     "Strict whole-tissue sensitivity: consensus gene list from the 7 whole-tissue cohorts (545 up / 225 down) with per-gene cohort support.",
+     "严格组织敏感性：7 个原组织队列的共识基因表（545 上调 / 225 下调）及逐基因队列支持。")
+_def("dl_inventory",
+     "Primary-contrast inventory: the 10 disease cohorts with design types and per-arm sample sizes.",
+     "主对比清单：10 个疾病队列的设计类型与每臂样本量。")
+_def("dl_did",
+     "Dupilumab difference-in-differences (exploratory): genome-wide interaction table, the 8 markers, and the program-score test.",
+     "Dupilumab 差值中的差值（探索性）：全基因组交互表、8 个标志物与程序评分检验。")
+_def("t_did_h", "Drug specificity: difference-in-differences (exploratory)", "药物特异性：差值中的差值（探索性）")
 _def("title_treatment", "Treatment response", "治疗反应")
 _def("g_f1_t", "Cross-cohort meta-analysis", "跨队列 Meta 分析")
 _def("g_f1_combined", "Combined logFC (random effects)", "合并 logFC（随机效应）")
@@ -292,6 +305,9 @@ _def("g_f1_ci", "95% CI", "95% 置信区间")
 _def("g_f1_p", "Combined p", "合并 p 值")
 _def("g_f1_i2", "Heterogeneity I\u00b2", "异质性 I\u00b2")
 _def("g_f1_k", "cohorts", "队列数")
+_def("g_f1_tau2", "\u03c4\u00b2 (between-cohort variance)", "\u03c4\u00b2（队列间方差）")
+_def("g_f1_pi", "95% prediction interval", "95% 预测区间")
+_def("g_f1_loo", "Leave-one-cohort-out range", "留一队列范围")
 _def("g_f1_method",
      "Random-effects meta-analysis (DerSimonian\u2013Laird) over the primary case\u2013control contrasts of 10 bulk cohorts; per-cohort SE from lfcSE or |logFC/t|. Shown only when \u22653 cohorts measured the gene.",
      "10 个 bulk 队列主病例-对照对比的随机效应 Meta 分析（DerSimonian\u2013Laird）；各队列标准误取自 lfcSE 或 |logFC/t|。基因在 \u22653 个队列中测得时才展示。")
@@ -351,8 +367,8 @@ _def("t_cav",
 # --- v1.3: downloads ---
 _dl9 = [
     ("dl9_f1meta",
-     "Meta-analysis: per-gene combined logFC, 95% CI, combined p, I\u00b2, k (DerSimonian\u2013Laird, 10 primary contrasts; genes with k\u22653).",
-     "Meta 分析：逐基因合并 logFC、95% CI、合并 p、I\u00b2、k（DerSimonian\u2013Laird，10 个主对比；k\u22653 的基因）。"),
+     "Meta-analysis: per-gene combined logFC, 95% CI, combined p, I\u00b2, \u03c4\u00b2, 95% prediction interval, leave-one-cohort-out range, k (DerSimonian\u2013Laird, 10 primary contrasts; genes with k\u22653).",
+     "Meta 分析：逐基因合并 logFC、95% CI、合并 p、I\u00b2、\u03c4\u00b2、95% 预测区间、留一队列范围、k（DerSimonian\u2013Laird，10 个主对比；k\u22653 的基因）。"),
     ("dl9_f1coh",
      "Meta-analysis: per-cohort logFC and SE for the same genes (forest-plot input).",
      "Meta 分析：同上基因逐队列 logFC 与 SE（森林图输入）。"),
@@ -421,9 +437,10 @@ _ml = [
      "program-/gene-level evidence.",
      "内型（嗜酸/非嗜酸）标签只有 6 个系列在原始元数据中自带内型标签，且多为小样本——本站不做组织嗜酸计数的预测，只做程序/基因层面的证据展示。"),
     ("m_l2",
-     "Six bulk cohorts have n\u22647 per group or low power (GSE72713, GSE150846, GSE174681, GSE330761, "
-     "GSE36830, GSE194282) \u2014 their weight in the evidence matrix should be discounted.",
-     "6 个 bulk 队列 n≤7/组或功效低（GSE72713、GSE150846、GSE174681、GSE330761、GSE36830、GSE194282），证据矩阵中权重应下调。"),
+     "Five bulk cohorts have fewer than five samples in at least one primary-contrast arm "
+     "(GSE198950, GSE174681, GSE150846, GSE330761, GSE72713) \u2014 their contrasts fall outside the "
+     "\\u22655-per-arm denominator of the marker-recovery validation and are flagged wherever they appear.",
+     "5 个 bulk 队列的主对比至少一臂少于 5 例（GSE198950、GSE174681、GSE150846、GSE330761、GSE72713）——其对比不进入标志物回收验证的每臂≥5 分母，出现处均有标注。"),
     ("m_l3",
      "GSE198950 has tissue confounding, GSE69093 a genuine weak signal, GSE189690/GSE330761 no healthy "
      "controls \u2014 cross-cohort comparisons must be stratified, never directly merged.",
@@ -1113,6 +1130,32 @@ def build_treatment():
         for d in drugs)
     drug_tbl = ("<table><tr><th>#</th><th>Compound</th><th>Cell line</th><th>Dose</th>"
                 "<th>Overlap score</th></tr>" + drows + "</table>")
+    # v1.6: exploratory difference-in-differences block (data: step2 did_dupilimab)
+    did_dir = os.path.join(PROJ, "analysis", "step2_bulk", "did_dupilimab")
+    mdid = read_csv_dict(os.path.join(did_dir, "markers_did.csv"))
+    pdid = read_csv_dict(os.path.join(did_dir, "program_score_did.csv"))[0]
+    drows2 = "".join(
+        f"<tr><td>{m['gene']}</td><td>{float(m['D_within_logFC']):.3f} ({float(m['D_within_FDR']):.3g})</td>"
+        f"<td>{float(m['DiD_logFC']):.3f}</td><td>{float(m['DiD_FDR']):.3g}</td></tr>" for m in mdid)
+    did_tbl = ("<table><tr><th>Gene</th><th>Within-arm dupilumab logFC (FDR)</th>"
+               "<th>DiD logFC</th><th>DiD FDR</th></tr>" + drows2 + "</table>")
+    _def("t_did_note",
+         f"Within-arm reversal alone does not prove drug specificity. The formal test is the "
+         f"difference-in-differences (treatment \u00d7 time) analysis on the 66 complete pairs: the type-2 "
+         f"program-score change differs between arms (Wilcoxon rank-sum p = {float(pdid['wilcox_p']):.3g}; "
+         f"Hodges\u2013Lehmann estimate {float(pdid['HL_estimate_DminusP']):.3f}, 95% CI "
+         f"[{float(pdid['HL_lo']):.3f}, {float(pdid['HL_hi']):.3f}]), and 17 genes reach FDR&lt;0.05 "
+         f"genome-wide \u2014 but none of the 8 pre-defined markers passes the interaction FDR "
+         f"(POSTN and SERPINB2 are borderline), so drug specificity is supported at the program-score "
+         f"level, not gene by gene. Exploratory (post-hoc) analysis; full tables in Downloads.",
+         f"组内逆转本身不能证明药物特异性。正式检验是对 66 个完整配对做的差值中的差值（治疗\u00d7时间）"
+         f"分析：2 型程序评分的变化在两臂间不同（Wilcoxon 秩和 p = {float(pdid['wilcox_p']):.3g}；"
+         f"Hodges\u2013Lehmann 估计 {float(pdid['HL_estimate_DminusP']):.3f}，95% CI "
+         f"[{float(pdid['HL_lo']):.3f}, {float(pdid['HL_hi']):.3f}]），全基因组 17 个基因达到 FDR&lt;0.05"
+         f"——但 8 个预定义标志物无一通过交互 FDR（POSTN 与 SERPINB2 临界），故药物特异性在程序评分"
+         f"层面得到支持，而非逐个基因。探索性（事后）分析；全表见数据下载。")
+    did_block = (f"<h3 {dk('t_did_h')}>{en_of('t_did_h')}</h3>" + did_tbl
+        + f"<p {dk('t_did_note')}>{en_of('t_did_note')}</p>")
     body = (DISCLAIMER
         + f"<p {dk('t_intro')}>{en_of('t_intro')}</p>"
         + f"<div class=\"caveat\" {dk('t_cav')}>{en_of('t_cav')}</div>"
@@ -1126,6 +1169,7 @@ def build_treatment():
         + f"<p {dk('t_marker_note')}>{en_of('t_marker_note')}</p>"
         + f"<h3 {dk('t_prog_h')}>{en_of('t_prog_h')}</h3>" + prog_tbl
         + f"<p {dk('t_prog_note')}>{en_of('t_prog_note')}</p>"
+        + did_block
         + f"<h3 {dk('t_inv_h')}>{en_of('t_inv_h')}</h3>" + inv_tbl
         + f"<p {dk('t_inv_note')}>{en_of('t_inv_note')}</p>"
         + f"<h3 {dk('t_drug_h')}>{en_of('t_drug_h')}</h3>"
@@ -1161,6 +1205,12 @@ def build_downloads():
         ("coexpression_top10.csv", "dl9_f4"),
         ("literature_support.csv", "dl9_f6"),
         ("treatment_response.json", "dl9_f10"),
+        ("reproduction_audit.csv", "dl_audit"),
+        ("strict_consensus.csv", "dl_strict"),
+        ("primary_contrasts_inventory.csv", "dl_inventory"),
+        ("did_de.csv", "dl_did"),
+        ("markers_did.csv", "dl_did"),
+        ("program_score_did.csv", "dl_did"),
     ]
     # v1.3 download-label keys live in _dl9; register them as _STRINGS entries
     for k, en, zh in _dl9:
@@ -1191,6 +1241,7 @@ def gene_js_strings():
             "gpw_t", "gpw_path", "gpw_cons", "gpw_cons_up", "gpw_cons_down",
             "gpw_cons_no", "gpw_target", "gpw_ncol", "path_th_term", "path_th_db",
             "g_f1_t", "g_f1_combined", "g_f1_ci", "g_f1_p", "g_f1_i2", "g_f1_k",
+            "g_f1_tau2", "g_f1_pi", "g_f1_loo",
             "g_f1_method", "g_f1_forest",
             "g_f4_t", "g_f4_method", "g_f4_th_g", "g_f4_th_r", "g_f4_th_k",
             "g_f3_t", "g_f3_gwas", "g_f3_trait", "g_f3_bestp", "g_f3_n",
@@ -1288,6 +1339,7 @@ function f1Block(key){
   if(!m) return '';
   let html = '<div class="card"><h3>'+gs('g_f1_t')+'</h3>';
   html += '<p><b>'+gs('g_f1_combined')+':</b> '+fmt(m.lfc,3)+' &nbsp; <b>'+gs('g_f1_ci')+':</b> ['+fmt(m.lo,3)+', '+fmt(m.hi,3)+'] &nbsp; <b>'+gs('g_f1_p')+':</b> '+fmtP(m.p)+' &nbsp; <b>'+gs('g_f1_i2')+':</b> '+fmt(m.i2,1)+'% &nbsp; <b>'+gs('g_f1_k')+':</b> '+m.k+'</p>';
+  if(m.t2!==undefined){ html += '<p><b>'+gs('g_f1_tau2')+':</b> '+fmt(m.t2,3)+' &nbsp; <b>'+gs('g_f1_pi')+':</b> ['+fmt(m.plo,3)+', '+fmt(m.phi,3)+'] &nbsp; <b>'+gs('g_f1_loo')+':</b> ['+fmt(m.lmin,3)+', '+fmt(m.lmax,3)+']</p>'; }
   html += '<h4>'+gs('g_f1_forest')+'</h4><canvas id="cv_f1" width="900" height="360"></canvas>';
   html += '<p style="font-size:12px;color:#666">'+gs('g_f1_method')+'</p></div>';
   return html;
@@ -1444,7 +1496,7 @@ def main():
 
     # v1.3 download files
     for src, dst in [
-        (os.path.join(s9, "f1_meta.csv"), "meta_combined.csv"),
+        (os.path.join(s9, "meta_v2", "meta_extended.csv"), "meta_combined.csv"),
         (os.path.join(s9, "f1_meta_cohorts.csv"), "meta_percohort.csv"),
         (os.path.join(s9, "f2_drugs.csv"), "drug_reversal_l1000cds2.csv"),
         (os.path.join(s9, "f3_genetic.csv"), "genetic_support.csv"),
@@ -1472,6 +1524,20 @@ def main():
     for src, dst in copies:
         shutil.copy(src, os.path.join(data_dir, dst))
 
+    # v1.6 download files (audit v1.6, strict-tissue sensitivity, DiD)
+    s6 = os.path.join(PROJ, "analysis", "step6_validation")
+    sst = os.path.join(s2, "sensitivity_strict_tissue")
+    sdid = os.path.join(s2, "did_dupilimab")
+    for src, dst in [
+        (os.path.join(s6, "reproduction_audit_v1.6.csv"), "reproduction_audit.csv"),
+        (os.path.join(sst, "strict_consensus.csv"), "strict_consensus.csv"),
+        (os.path.join(sst, "primary_contrasts_inventory.csv"), "primary_contrasts_inventory.csv"),
+        (os.path.join(sdid, "did_de.csv"), "did_de.csv"),
+        (os.path.join(sdid, "markers_did.csv"), "markers_did.csv"),
+        (os.path.join(sdid, "program_score_did.csv"), "program_score_did.csv"),
+    ]:
+        shutil.copy(src, os.path.join(data_dir, dst))
+
     # step8 analysis-layer files
     s8 = os.path.join(PROJ, "analysis", "step8_expansion")
     copies8 = [
@@ -1483,8 +1549,8 @@ def main():
         ("deconv/deconv_summary.csv", "deconv_summary.csv"),
         ("consensus_annotated.csv", "consensus_annotated.csv"),
         ("consensus_enrichment.csv", "consensus_enrichment.csv"),
-        ("lr/lr_interactions_CRSwNP_vs_control.csv", "lr_interactions_CRSwNP_vs_control.csv"),
-        ("lr/lr_interactions_CRSsNP_vs_control.csv", "lr_interactions_CRSsNP_vs_control.csv"),
+        ("lr/cellchat_rerun_norm/lr_interactions_CRSwNP_vs_control_norm.csv", "lr_interactions_CRSwNP_vs_control.csv"),
+        ("lr/cellchat_rerun_norm/lr_interactions_CRSsNP_vs_control_norm.csv", "lr_interactions_CRSsNP_vs_control.csv"),
     ]
     for src, dst in copies8:
         shutil.copy(os.path.join(s8, src), os.path.join(data_dir, dst))
