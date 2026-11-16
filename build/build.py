@@ -23,7 +23,7 @@ from datetime import date
 BASE = os.path.dirname(os.path.abspath(__file__))
 PROJ = os.path.dirname(os.path.dirname(BASE))  # ~/workspace/sci-crswnp-resource
 SITE = os.path.join(PROJ, "web", "site")
-VERSION = "v1.4"
+VERSION = "v1.5"
 BUILD_DATE = date.today().isoformat()
 
 # ================= i18n string registry: key -> (en, zh) =================
@@ -61,16 +61,16 @@ _def("disc",
      "不提供临床诊断、患病概率或治疗建议。所有数值均为公开数据的统一再分析结果，每个队列的已知限制均标注在数据旁。")
 # footer pieces (name injected separately)
 _def("foot_src", "Data source: public GEO data (PMID/GEO links for each series on the \u2018Cohorts &amp; datasets\u2019 page)", "数据来源：GEO 公开数据（各系列见“队列与数据集”页的 PMID/GEO 链接）")
-_def("foot_auth", "Authors: Peiliang Lei", "作者：Peiliang Lei")
+_def("foot_auth", "Authors: Peiliang Lei, Wenrong Dong, Jingyi Tan, Xiaoying Yang", "作者：Peiliang Lei、Wenrong Dong、Jingyi Tan、Xiaoying Yang")
 
 # --- index ---
 _def("idx_intro",
      "This resource curates all 66 human chronic rhinosinusitis / nasal polyp datasets in GEO "
-     "one by one (30 in the core set), re-runs differential analysis uniformly for each eligible "
+     "one by one (32 in the core set), re-runs differential analysis uniformly for each eligible "
      "bulk cohort, annotates single-cell datasets with one unified cell-type vocabulary, organizes "
      "GeoMx spatial data by compartment, and aligns the three evidence layers. All results are "
      "queryable and downloadable online.",
-     "本资源对 GEO 全部 66 个慢性鼻窦炎/鼻息肉人类数据集逐个策展（核心集 30），对合格的 bulk 队列逐个统一重跑差异分析、"
+     "本资源对 GEO 全部 66 个慢性鼻窦炎/鼻息肉人类数据集逐个策展（核心集 32），对合格的 bulk 队列逐个统一重跑差异分析、"
      "对单细胞数据集统一注释到一套细胞类型词表、对 GeoMx 空间数据按区室整理，与 bulk/单细胞三方对齐。所有结果均可在线查询与下载。")
 _stat = [
     ("series_curated", "Curated GSE series", "策展 GSE 系列"),
@@ -303,7 +303,7 @@ _def("g_f4_method",
 _def("g_f4_th_g", "Gene", "基因")
 _def("g_f4_th_r", "Mean r", "平均 r")
 _def("g_f4_th_k", "cohorts", "队列数")
-_def("g_f3_t", "Genetic support", "遗传支持")
+_def("g_f3_t", "Genetic annotation", "遗传注释")
 _def("g_f3_gwas", "GWAS Catalog (genome-wide significant, p\u22645e-8)", "GWAS Catalog（全基因组显著，p\u22645e-8）")
 _def("g_f3_trait", "Trait", "性状")
 _def("g_f3_bestp", "Strongest p", "最强 p 值")
@@ -360,8 +360,8 @@ _dl9 = [
      "Drug reversal: L1000CDS2 hits for the consensus signature (top 50; in-silico hypothesis generation only).",
      "药物逆转：共识签名的 L1000CDS2 命中（前 50；仅计算假说生成）。"),
     ("dl9_f3",
-     "Genetic support: GWAS Catalog p\u22645e-8 hits and GTEx v8 eQTL presence per gene (proxy tissues noted).",
-     "遗传支持：逐基因 GWAS Catalog p\u22645e-8 命中与 GTEx v8 eQTL 存在性（已注代理组织）。"),
+     "Genetic annotation (related traits and proxy tissues): GWAS Catalog p\u22645e-8 hits for related traits and GTEx v8 significant variant\u2013gene pairs (q \u2264 0.05) per gene.",
+     "遗传注释（相关性状与代理组织）：逐基因 GWAS Catalog 相关性状 p\u22645e-8 命中与 GTEx v8 显著变异\u2013基因对（q \u2264 0.05）。"),
     ("dl9_f4",
      "Co-expression: top-10 positive partners per gene (Fisher-z averaged Spearman over \u22653 bulk cohorts).",
      "共表达：逐基因前 10 正相关伙伴（\u22653 bulk 队列 Fisher-z 合并 Spearman）。"),
@@ -461,8 +461,8 @@ _def("m_src",
      "全部来自 GEO 公开系列（各系列 PMID 与 GEO 链接见“队列与数据集”页）；策展报告、重分析报告与本网站构建脚本随代码仓库公开，全部数字可复现。代码仓库：<a href=\"https://github.com/polypatlas/polypatlas\">github.com/polypatlas/polypatlas</a> · 数据存档：<a href=\"https://doi.org/10.5281/zenodo.23448779\">Zenodo DOI 10.5281/zenodo.23448779</a>。")
 _def("m_auth_h", "Authors &amp; contact", "作者与联系")
 _def("m_auth",
-     "Authors: Peiliang Lei \u00b7 Corresponding: Peiliang Lei (of@live.com) \u00b7 Cite this resource: Lei P. PolypAtlas: a harmonised multi-modal transcriptomic resource integrating public bulk, single-cell and spatial transcriptomic data of chronic rhinosinusitis with nasal polyps. https://polyp.erbihou.org/ (data archive: Zenodo, DOI 10.5281/zenodo.23448779)",
-     "作者：Peiliang Lei · 通讯：Peiliang Lei（of@live.com） · 引用本资源：Lei P. PolypAtlas：整合慢性鼻窦炎伴鼻息肉公共 bulk、单细胞与空间转录组数据的统一多模态转录组资源。https://polyp.erbihou.org/（数据存档：Zenodo，DOI 10.5281/zenodo.23448779）")
+     "Authors: Peiliang Lei, Wenrong Dong, Jingyi Tan, Xiaoying Yang \u00b7 Corresponding: Peiliang Lei (of@live.com) \u00b7 Cite this resource: Lei P, Dong W, Tan J, Yang X. PolypAtlas: a harmonised multi-modal transcriptomic resource integrating public bulk, single-cell and spatial transcriptomic data of chronic rhinosinusitis with nasal polyps. https://polyp.erbihou.org/ (data archive: Zenodo, DOI 10.5281/zenodo.23448779)",
+     "作者：Peiliang Lei、Wenrong Dong、Jingyi Tan、Xiaoying Yang · 通讯：Peiliang Lei（of@live.com） · 引用本资源：Lei P, Dong W, Tan J, Yang X. PolypAtlas：整合慢性鼻窦炎伴鼻息肉公共 bulk、单细胞与空间转录组数据的统一多模态转录组资源。https://polyp.erbihou.org/（数据存档：Zenodo，DOI 10.5281/zenodo.23448779）")
 
 # ---------------- cohort metadata (from step2_report.md, numbers exact) --------
 # n / n_en: design strings for the static cohorts page + dynamic gene page
@@ -481,8 +481,8 @@ BULK_COHORTS = [
      "sig": "3,141", "caveat": "组织混杂：病例为筛窦组织、对照为下鼻甲组织——IL33/POSTN 显著反向可能源于此，使用时必须注明。",
      "caveat_en": "Tissue confounding: cases are ethmoid tissue, controls are inferior turbinate — the significant reversal of IL33/POSTN may stem from this; must be stated when used."},
     {"id": "GSE267331", "n": "dupilumab 治疗后 vs 前（47 对配对）", "n_en": "Dupilumab post- vs pre-treatment (47 paired pairs)", "method": "芯片 · limma 配对",
-     "sig": "4,856", "note": "唯一的治疗纵向队列（SINUS-52 鼻刷）：CLC/POSTN/SERPINB2 显著下调，符合治疗逆转预期；安慰剂臂 0 个显著。",
-     "note_en": "The only treatment longitudinal cohort (SINUS-52 nasal brushing): CLC/POSTN/SERPINB2 significantly down, consistent with treatment reversal; 0 significant in the placebo arm."},
+     "sig": "4,856", "note": "唯一的治疗纵向队列（SINUS-52 鼻刷）：CLC/POSTN/SERPINB2 显著下调，符合治疗逆转预期；敏感性规则（最大方差探针折叠）下为 3,581 个（严格子集），安慰剂臂两种规则下均为 0 个显著。",
+     "note_en": "The only treatment longitudinal cohort (SINUS-52 nasal brushing): CLC/POSTN/SERPINB2 significantly down, consistent with treatment reversal; 3,581 under the maximum-variance probe-collapse sensitivity rule (a strict subset); 0 significant in the placebo arm under both rules."},
     {"id": "GSE189690", "n": "N-ERD(13) vs 非 N-ERD CRSwNP(13)", "n_en": "N-ERD (13) vs non-N-ERD CRSwNP (13)", "method": "RNA-seq · DESeq2",
      "sig": "12", "caveat": "无健康对照：仅疾病亚型对比，不参与病例-对照方向先验。",
      "caveat_en": "No healthy controls: disease-subtype contrast only; excluded from case–control directional priors."},
@@ -511,8 +511,8 @@ BULK_COHORTS = [
      "sig": "0", "caveat": "原代培养细胞：全转录组 0 显著但 p 值富集于小 p 端，判为真实弱信号（非技术错误）。",
      "caveat_en": "Primary cultured cells: zero transcriptome-wide significant genes but p-values enriched at the small-p end — judged a genuine weak signal (not a technical error)."},
     {"id": "GSE70898_70900", "n": "息肉 T 细胞 vs 正常鼻黏膜 T 细胞(12v6)", "n_en": "Polyp T cells vs normal nasal-mucosa T cells (12v6)", "method": "芯片 · limma",
-     "sig": "9,426", "note": "同研究跨系列（GSE70898+GSE70900）合并；短期离体组织培养。",
-     "note_en": "Merged across two series of the same study (GSE70898+GSE70900); short-term explant culture."},
+     "sig": "9,426", "note": "同研究跨系列（GSE70898+GSE70900）合并；短期离体组织培养；敏感性规则（最大方差探针折叠）下为 7,397 个（严格子集）。",
+     "note_en": "Merged across two series of the same study (GSE70898+GSE70900); short-term explant culture; 7,397 under the maximum-variance probe-collapse sensitivity rule (a strict subset)."},
     {"id": "GSE72713", "n": "CRSwNP(6) vs 正常对照(3)", "n_en": "CRSwNP (6) vs normal controls (3)", "method": "FPKM · limma",
      "sig": "129", "note": "n 极小（3/3/3）；lncRNA+mRNA 混合文件。",
      "note_en": "Very small n (3/3/3); mixed lncRNA+mRNA files."},
