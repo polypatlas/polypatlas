@@ -1,0 +1,10 @@
+gene,expected_direction,frozen_n_correct,frozen_n_measured,gse36830_logFC,gse36830_FDR,gse36830_correct,no36830_n_correct,no36830_n_measured
+CLC,up,6,7,2.616,0.24,True,5,6
+CCL26,up,7,7,1.614,0.416,True,6,6
+CCL13,up,7,7,3.093,0.168,True,6,6
+IL33,up,4,7,0.124,0.679,True,3,6
+TSLP,up,7,7,0.284,0.678,True,6,6
+POSTN,up,6,7,0.358,0.285,True,5,6
+SERPINB2,up,5,7,1.06,0.426,True,4,6
+ALOX15,up,7,7,0.307,0.68,True,6,6
+TOTAL,,49,56,,,,41,48

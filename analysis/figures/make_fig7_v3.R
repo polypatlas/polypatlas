@@ -23,7 +23,7 @@ dn_genes <- c("CD300LG", "CCBE1", "CA3", "PON3", "NELL2", "NDNF", "GPM6A",
 stopifnot(setequal(cb$gene[cb$direction == "up"], up_genes),
           setequal(cb$gene[cb$direction == "down"], dn_genes),
           nrow(cb) == 30)
-cb$x <- ifelse(cb$direction == "up", cb$frac_consistent, -cb$frac_consistent)
+cb$x <- cb$frac_consistent  # v1.7: both panels share the 0->1 axis direction
 cb$lab <- paste0(cb$n_sig_FDR005, " sig · ", cb$n_consistent, "/",
                  cb$n_cohorts_measured)
 
@@ -39,12 +39,11 @@ mk <- function(dd, col) {
     geom_segment(aes(x = 0, xend = x, y = gene, yend = gene),
                  colour = "#CCCCCC", linewidth = 0.5) +
     geom_point(size = 2.6, colour = col) +
-    geom_text(aes(x = x + ifelse(dd == "up", 0.035, -0.035), label = lab),
-              hjust = ifelse(dd == "up", 0, 1),
+    geom_text(aes(x = x + 0.035, label = lab),
+              hjust = 0,
               size = 2.5, colour = COL$grey_txt) +
-    scale_x_continuous(breaks = c(-1, -0.75, -0.5, -0.25, 0, 0.25, 0.5, 0.75, 1),
-                       labels = function(v) abs(v),
-                       limits = if (dd == "up") c(0, 1.52) else c(-1.52, 0)) +
+    scale_x_continuous(breaks = c(0, 0.25, 0.5, 0.75, 1),
+                       limits = c(0, 1.52)) +
     scale_y_discrete(expand = expansion(mult = c(0.02, 0.15))) +
     labs(x = NULL, y = NULL) + th +
     theme(panel.grid.major.y = element_blank(),
@@ -55,7 +54,7 @@ pU <- mk("up", COL$up) +
            label = "Up · 825 genes")
 pD <- mk("down", COL$down) +
   labs(x = "Fraction of cohorts direction-consistent") +
-  annotate("text", x = -0.02, y = 16.1, hjust = 1, size = 3.2, fontface = "bold",
+  annotate("text", x = 0.02, y = 16.1, hjust = 0, size = 3.2, fontface = "bold",
            label = "Down · 196 genes")
 fig <- (pU / pD) + plot_layout(heights = c(1, 1))
 save_fig(fig, "manuscript/figures/Fig7", width_mm = 180, height_mm = 175)

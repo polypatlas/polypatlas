@@ -76,9 +76,8 @@ volc <- function(f, cohort_lab) {
                colour = COL$neutral, linewidth = 0.5) +
     geom_text_repel(data = lab, aes(label = symbol), size = 2.5,
                     max.overlaps = 20, box.padding = 0.3) +
-    annotate("text", x = min(d$logFC) * 0.98, y = -log10(0.05) + max(d$mlp) * 0.03, hjust = 0,
-             vjust = 0, size = 3, fontface = "bold", label = cohort_lab) +
-    labs(x = "logFC", y = "-log10 p-value") + th
+    labs(x = "logFC", y = "-log10 p-value", title = cohort_lab) + th +
+    theme(plot.title = element_text(size = 10, face = "bold", hjust = 0))
 }
 pC <- volc("analysis/step2_bulk/de/GSE136825_polyp_vs_ctrl.csv", "GSE136825 · 75 vs 28")
 pD <- volc("analysis/step2_bulk/de/GSE179265_CRSwNP_vs_ctrl.csv", "GSE179265 · 17 vs 7")

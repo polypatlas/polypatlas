@@ -58,7 +58,7 @@ plot_fig <- function() {
   arrow(0.50, 0.614, 0.50, 0.555)
   arrow(0.83, 0.614, 0.58, 0.555, curve = -0.06)
 
-  box(0.50, 0.328, 0.58, 0.109, cols$val, "Validation", "marker recovery 87.5% · dupilumab 7/8 reversed", "audit: 24/61 reproduced · 54/61 direction-consistent · 825/196 consensus")
+  box(0.50, 0.328, 0.58, 0.109, cols$val, "Validation", "marker recovery 87.5% · dupilumab 7/8 reversed", "audit: 23/60 reproduced · 53/60 direction-consistent · 825/196 consensus")
   arrow(0.50, 0.437, 0.50, 0.383)
 
   box(0.50, 0.210, 0.44, 0.092, cols$web, "PolypAtlas website (7 pages, bilingual)", "the live resource - one box per page below")

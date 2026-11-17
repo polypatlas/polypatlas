@@ -23,7 +23,7 @@ from datetime import date
 BASE = os.path.dirname(os.path.abspath(__file__))
 PROJ = os.path.dirname(os.path.dirname(BASE))  # ~/workspace/sci-crswnp-resource
 SITE = os.path.join(PROJ, "web", "site")
-VERSION = "v1.6"
+VERSION = "v1.7"
 BUILD_DATE = date.today().isoformat()
 
 # ================= i18n string registry: key -> (en, zh) =================
@@ -286,8 +286,14 @@ _def("gpw_ncol", "contrasts", "对比数")
 # --- v1.3: step-9 added-value layers (F1/F4/F3/F6) ---
 _def("nav_treatment", "Treatment response", "治疗反应")
 _def("dl_audit",
-     "Reproduction audit (release v1.6): 85 rows \u2014 every extracted claim with its grade, the claimed proposition, the measured quantity and their match.",
-     "复现审计（v1.6）：85 行——每条提取声称及其判级、原命题、实际量测与命题匹配。")
+     "Reproduction audit (release v1.7): 85 rows \u2014 every extracted claim with its grade, the claimed proposition, the measured quantity and their match.",
+     "复现审计（v1.7）：85 行——每条提取声称及其判级、原命题、实际量测与命题匹配。")
+_def("dl_sens198950",
+     "GSE198950-exclusion sensitivity (release v1.7): consensus lists recomputed without the tissue-site-confounded cohort (9 primary cohorts; 6 strict).",
+     "GSE198950 剔除敏感性（v1.7）：剔除组织部位混杂队列后重算的共识基因表（9 个主队列；6 个严格队列）。")
+_def("dl_sens36830",
+     "GSE36830 donor-handling sensitivity (release v1.7): consensus with the cohort excluded, consensus with its polyp-only contrast, and the marker-panel recount without the cohort.",
+     "GSE36830 供者处理敏感性（v1.7）：整队列剔除共识、息肉单侧对比共识，以及剔除该队列后的标志物面板复算。")
 _def("dl_strict",
      "Strict whole-tissue sensitivity: consensus gene list from the 7 whole-tissue cohorts (545 up / 225 down) with per-gene cohort support.",
      "严格组织敏感性：7 个原组织队列的共识基因表（545 上调 / 225 下调）及逐基因队列支持。")
@@ -474,8 +480,8 @@ _def("m_src_h", "Data sources", "数据来源")
 _def("m_src",
      "All data come from public GEO series (PMID and GEO links for each series are on the "
      "\u2018Cohorts &amp; datasets\u2019 page); the curation and reanalysis reports plus this site\u2019s "
-     "build scripts are public with the code repository, so every number is reproducible. Code: <a href=\"https://github.com/polypatlas/polypatlas\">github.com/polypatlas/polypatlas</a> \u00b7 Data archive: <a href=\"https://doi.org/10.5281/zenodo.23448779\">Zenodo DOI 10.5281/zenodo.23448779</a>.",
-     "全部来自 GEO 公开系列（各系列 PMID 与 GEO 链接见“队列与数据集”页）；策展报告、重分析报告与本网站构建脚本随代码仓库公开，全部数字可复现。代码仓库：<a href=\"https://github.com/polypatlas/polypatlas\">github.com/polypatlas/polypatlas</a> · 数据存档：<a href=\"https://doi.org/10.5281/zenodo.23448779\">Zenodo DOI 10.5281/zenodo.23448779</a>。")
+     "build scripts are public with the code repository, and every number on this site traces to a frozen result file in the data archive. Analysis code: <a href=\"https://github.com/polypatlas/polypatlas/tree/main/analysis\">github.com/polypatlas/polypatlas/tree/main/analysis</a> \u00b7 Data archive, release v1.7: <a href=\"https://doi.org/10.5281/zenodo.24300458\">Zenodo DOI 10.5281/zenodo.24300458</a> (concept DOI 10.5281/zenodo.23448779).",
+     "全部来自 GEO 公开系列（各系列 PMID 与 GEO 链接见“队列与数据集”页）；策展报告、重分析报告与本网站构建脚本随代码仓库公开，本站每个数字均可溯源至数据存档中的冻结结果文件。分析代码：<a href=\"https://github.com/polypatlas/polypatlas/tree/main/analysis\">github.com/polypatlas/polypatlas/tree/main/analysis</a> · 数据存档（v1.7 版）：<a href=\"https://doi.org/10.5281/zenodo.24300458\">Zenodo DOI 10.5281/zenodo.24300458</a>（概念 DOI 10.5281/zenodo.23448779）。")
 _def("m_auth_h", "Authors &amp; contact", "作者与联系")
 _def("m_auth",
      "Authors: Peiliang Lei, Wenrong Dong, Jingyi Tan, Xiaoying Yang \u00b7 Corresponding: Peiliang Lei (of@live.com) \u00b7 Cite this resource: Lei P, Dong W, Tan J, Yang X. PolypAtlas: a harmonised multi-modal transcriptomic resource integrating public bulk, single-cell and spatial transcriptomic data of chronic rhinosinusitis with nasal polyps. https://polyp.erbihou.org/ (data archive: Zenodo, DOI 10.5281/zenodo.23448779)",
@@ -878,6 +884,8 @@ WORKING_NAME = "PolypAtlas — CRSwNP Multi-modal Transcriptomic Resource"
 DISCLAIMER = f'<div class="disc" {dk("disc")}>{en_of("disc")}</div>'
 FOOTER = (f'<div class="footer">{WORKING_NAME} '
           f'· {VERSION} · '
+          f'<a href="https://doi.org/10.5281/zenodo.24300458">Zenodo release v1.7</a> · '
+          f'<a href="https://github.com/polypatlas/polypatlas/tree/main/analysis">analysis code</a> · '
           f'<span {dk("foot_src")}>{en_of("foot_src")}</span> · '
           f'<span {dk("foot_auth")}>{en_of("foot_auth")}</span></div>')
 
@@ -1208,6 +1216,11 @@ def build_downloads():
         ("reproduction_audit.csv", "dl_audit"),
         ("strict_consensus.csv", "dl_strict"),
         ("primary_contrasts_inventory.csv", "dl_inventory"),
+        ("sens198950_main9_consensus.csv", "dl_sens198950"),
+        ("sens198950_strict6_consensus.csv", "dl_sens198950"),
+        ("sens36830_excluded_consensus.csv", "dl_sens36830"),
+        ("sens36830_polypOnly_consensus.csv", "dl_sens36830"),
+        ("sens36830_marker_panel.csv", "dl_sens36830"),
         ("did_de.csv", "dl_did"),
         ("markers_did.csv", "dl_did"),
         ("program_score_did.csv", "dl_did"),
@@ -1524,12 +1537,17 @@ def main():
     for src, dst in copies:
         shutil.copy(src, os.path.join(data_dir, dst))
 
-    # v1.6 download files (audit v1.6, strict-tissue sensitivity, DiD)
+    # v1.7 download files (audit v1.7, strict-tissue sensitivity, DiD, round-3 sensitivities)
     s6 = os.path.join(PROJ, "analysis", "step6_validation")
     sst = os.path.join(s2, "sensitivity_strict_tissue")
     sdid = os.path.join(s2, "did_dupilimab")
     for src, dst in [
-        (os.path.join(s6, "reproduction_audit_v1.6.csv"), "reproduction_audit.csv"),
+        (os.path.join(s6, "reproduction_audit_v1.7.csv"), "reproduction_audit.csv"),
+        (os.path.join(s2, "sensitivity_gse198950_out", "main9_consensus.csv"), "sens198950_main9_consensus.csv"),
+        (os.path.join(s2, "sensitivity_gse198950_out", "strict6_consensus.csv"), "sens198950_strict6_consensus.csv"),
+        (os.path.join(s2, "sensitivity_gse36830_donor", "consensus_A_main9_no36830.csv"), "sens36830_excluded_consensus.csv"),
+        (os.path.join(s2, "sensitivity_gse36830_donor", "consensus_B_main10_polypOnly.csv"), "sens36830_polypOnly_consensus.csv"),
+        (os.path.join(s2, "sensitivity_gse36830_donor", "marker_panel_no36830.csv"), "sens36830_marker_panel.csv"),
         (os.path.join(sst, "strict_consensus.csv"), "strict_consensus.csv"),
         (os.path.join(sst, "primary_contrasts_inventory.csv"), "primary_contrasts_inventory.csv"),
         (os.path.join(sdid, "did_de.csv"), "did_de.csv"),
