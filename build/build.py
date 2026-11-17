@@ -469,9 +469,9 @@ _ml = [
      "公开数据二次分析：原始研究的伦理批准由各原始研究承担；本站不收集任何新样本与个人信息。"),
     ("m_l8",
      "Analysis layer: deconvolution values are abundance <b>estimates</b> (marker scoring), not cell counts; "
-     "CellChat probabilities are small (~1e-6) and classical type-2 cytokine pairs fall below reliable "
+     "CellChat results are reported as library-size-normalised disease\u2013control probability differences from a single dataset, and classical type-2 cytokine pairs fall below reliable "
      "single-cell detection, so no cytokine-pair claims are made.",
-     "分析层：去卷积为丰度<b>估计值</b>（marker 打分），不是细胞计数；CellChat 概率很小（~1e-6），经典 2 型细胞因子"
+     "分析层：去卷积为丰度<b>估计值</b>（marker 打分），不是细胞计数；CellChat 结果以文库量归一化后的疾病–对照概率差报告（单一数据集），经典 2 型细胞因子"
      "对低于单细胞可靠检测线，故不作细胞因子互作声称。"),
 ]
 for _k, _e, _z in _ml:
