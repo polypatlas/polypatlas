@@ -23,7 +23,7 @@ from datetime import date
 BASE = os.path.dirname(os.path.abspath(__file__))
 PROJ = os.path.dirname(os.path.dirname(BASE))  # ~/workspace/sci-crswnp-resource
 SITE = os.path.join(PROJ, "web", "site")
-VERSION = "v1.7"
+VERSION = "v1.8"
 BUILD_DATE = date.today().isoformat()
 
 # ================= i18n string registry: key -> (en, zh) =================
@@ -95,7 +95,7 @@ _def("idx_bulk",
      "(direction / effect size / significance).",
      "<b>Bulk</b>：16 个队列逐队列差异分析（30 个对比），19,266 蛋白编码基因×队列证据矩阵。跨平台不合并表达矩阵，只在结果层汇总（方向/效应量/显著性）。")
 _def("idx_sc",
-     "<b>Single-cell</b>: unified annotation of 10 datasets (27-label cell vocabulary: 26 cell types + ambiguous); "
+     "<b>Single-cell</b>: unified annotation of 10 datasets (28-label cell vocabulary: 27 cell types + ambiguous); "
      "476,254 cells, 105 donor units; differential statistics at donor level (pseudobulk); "
      "17,631 genes \u00d7 41 contrasts.",
      "<b>单细胞</b>：10 个数据集统一注释（27 标签细胞词表：26 种细胞型 + ambiguous），476,254 细胞、105 供体单元；差异统计以供体为单位（pseudobulk），17,631 基因×41 对比。")
@@ -140,9 +140,9 @@ _def("co_th_donors", "Donors", "供体")
 _def("co_th_design", "Design", "设计")
 _def("co_sc_h", "Single-cell unified-annotation datasets (10)", "单细胞统一注释数据集（10）")
 _def("co_sc_intro",
-     "476,254 cells and 105 donor units in total; annotated to a unified 27-label cell vocabulary (26 cell types + ambiguous); "
+     "476,254 cells and 105 donor units in total; annotated to a unified 28-label cell vocabulary (27 cell types + ambiguous); "
      "differential statistics at donor level (pseudobulk).",
-     "共 476,254 细胞、105 供体单元；注释到统一 27 标签细胞词表（26 种细胞型 + ambiguous）；差异统计以供体为单位（pseudobulk）。")
+     "共 476,254 细胞、105 供体单元；注释到统一 28 标签细胞词表（27 种细胞型 + ambiguous）；差异统计以供体为单位（pseudobulk）。")
 _def("co_sp_h", "Spatial datasets (1)", "空间数据集（1）")
 _def("co_sp_intro",
      "GeoMx DSP: 40 ROIs \u00d7 10 donors (CRSwNP 6 / controls 4); panel of 1,480 genes "
@@ -286,8 +286,11 @@ _def("gpw_ncol", "contrasts", "对比数")
 # --- v1.3: step-9 added-value layers (F1/F4/F3/F6) ---
 _def("nav_treatment", "Treatment response", "治疗反应")
 _def("dl_audit",
-     "Reproduction audit (release v1.7): 85 rows \u2014 every extracted claim with its grade, the claimed proposition, the measured quantity and their match.",
-     "复现审计（v1.7）：85 行——每条提取声称及其判级、原命题、实际量测与命题匹配。")
+     "Reproduction audit (release v1.8): 85 rows \u2014 every extracted claim with its grade, the claimed proposition, the measured quantity and their match.",
+     "复现审计（v1.8）：85 行——每条提取声称及其判级、原命题、实际量测与命题匹配。")
+_def("dl_fig5stats",
+     "Figure 5 composition statistics (release v1.8): per-class Kruskal\u2013Wallis p, Benjamini\u2013Hochberg FDR and Hodges\u2013Lehmann effect estimates for GSE235711.",
+     "图 5 组成统计（v1.8）：GSE235711 逐类 Kruskal\u2013Wallis p 值、Benjamini\u2013Hochberg FDR 与 Hodges\u2013Lehmann 效应估计。")
 _def("dl_sens198950",
      "GSE198950-exclusion sensitivity (release v1.7): consensus lists recomputed without the tissue-site-confounded cohort (9 primary cohorts; 6 strict).",
      "GSE198950 剔除敏感性（v1.7）：剔除组织部位混杂队列后重算的共识基因表（9 个主队列；6 个严格队列）。")
@@ -411,7 +414,7 @@ _mf = [
      "<b>Bulk 统一重分析</b>：逐队列独立差异分析（counts→DESeq2；连续值→limma；配对→配对模型），先做尺度三方核查；探针按 min-p 塌缩到 symbol；跨平台只在结果层汇总，不合并表达矩阵。"),
     ("m_f3",
      "<b>Unified single-cell annotation</b>: Leiden clustering + canonical marker scoring to a unified "
-     "27-label vocabulary (26 cell types + ambiguous; scored on the full gene matrix, not an HVG subset); positive-control "
+     "28-label vocabulary (27 cell types + ambiguous; scored on the full gene matrix, not an HVG subset); positive-control "
      "assertions (housekeeping / epithelial / immune markers) must pass before results are released; "
      "differential statistics at donor level (pseudobulk).",
      "<b>单细胞统一注释</b>：leiden 聚类 + 规范 marker 打分到统一 27 标签词表（26 种细胞型 + ambiguous；全基因矩阵打分，非 HVG 子集）；出结果前先过阳性对照断言（管家/上皮/免疫标志）；差异统计以供体为单位（pseudobulk）。"),
@@ -480,8 +483,8 @@ _def("m_src_h", "Data sources", "数据来源")
 _def("m_src",
      "All data come from public GEO series (PMID and GEO links for each series are on the "
      "\u2018Cohorts &amp; datasets\u2019 page); the curation and reanalysis reports plus this site\u2019s "
-     "build scripts are public with the code repository, and every number on this site traces to a frozen result file in the data archive. Analysis code: <a href=\"https://github.com/polypatlas/polypatlas/tree/main/analysis\">github.com/polypatlas/polypatlas/tree/main/analysis</a> \u00b7 Data archive, release v1.7: <a href=\"https://doi.org/10.5281/zenodo.24300458\">Zenodo DOI 10.5281/zenodo.24300458</a> (concept DOI 10.5281/zenodo.23448779).",
-     "全部来自 GEO 公开系列（各系列 PMID 与 GEO 链接见“队列与数据集”页）；策展报告、重分析报告与本网站构建脚本随代码仓库公开，本站每个数字均可溯源至数据存档中的冻结结果文件。分析代码：<a href=\"https://github.com/polypatlas/polypatlas/tree/main/analysis\">github.com/polypatlas/polypatlas/tree/main/analysis</a> · 数据存档（v1.7 版）：<a href=\"https://doi.org/10.5281/zenodo.24300458\">Zenodo DOI 10.5281/zenodo.24300458</a>（概念 DOI 10.5281/zenodo.23448779）。")
+     "build scripts are public with the code repository, and every number on this site traces to a frozen result file in the data archive. Analysis code: <a href=\"https://github.com/polypatlas/polypatlas/tree/main/analysis\">github.com/polypatlas/polypatlas/tree/main/analysis</a> \u00b7 Data archive, release v1.8: <a href=\"https://doi.org/10.5281/zenodo.24329815\">Zenodo DOI 10.5281/zenodo.24329815</a> (concept DOI 10.5281/zenodo.23448779).",
+     "全部来自 GEO 公开系列（各系列 PMID 与 GEO 链接见“队列与数据集”页）；策展报告、重分析报告与本网站构建脚本随代码仓库公开，本站每个数字均可溯源至数据存档中的冻结结果文件。分析代码：<a href=\"https://github.com/polypatlas/polypatlas/tree/main/analysis\">github.com/polypatlas/polypatlas/tree/main/analysis</a> · 数据存档（v1.8 版）：<a href=\"https://doi.org/10.5281/zenodo.24329815\">Zenodo DOI 10.5281/zenodo.24329815</a>（概念 DOI 10.5281/zenodo.23448779）。")
 _def("m_auth_h", "Authors &amp; contact", "作者与联系")
 _def("m_auth",
      "Authors: Peiliang Lei, Wenrong Dong, Jingyi Tan, Xiaoying Yang \u00b7 Corresponding: Peiliang Lei (of@live.com) \u00b7 Cite this resource: Lei P, Dong W, Tan J, Yang X. PolypAtlas: a harmonised multi-modal transcriptomic resource integrating public bulk, single-cell and spatial transcriptomic data of chronic rhinosinusitis with nasal polyps. https://polyp.erbihou.org/ (data archive: Zenodo, DOI 10.5281/zenodo.23448779)",
@@ -525,8 +528,8 @@ BULK_COHORTS = [
      "sig": "443", "caveat": "无健康对照；分选肥大细胞亚群图谱型（3v3）。",
      "caveat_en": "No healthy controls; sorted mast-cell subset atlas (3v3)."},
     {"id": "GSE194282", "n": "鼻息肉(7) vs 对照(7)", "n_en": "Nasal polyps (7) vs controls (7)", "method": "芯片 · limma",
-     "sig": "251", "note": "对照含肿瘤旁正常组织；样本量小，功效有限。",
-     "note_en": "Controls include tumor-adjacent normal tissue; small sample size, limited power."},
+     "sig": "251", "note": "对照为正常健康对照的钩突组织（按年龄分层）；样本量小，功效有限。",
+     "note_en": "Controls are uncinate tissue from normal healthy controls (age-stratified); small sample size, limited power."},
     {"id": "GSE36830", "n": "CRSwNP(12) vs 钩突对照(6)", "n_en": "CRSwNP (12) vs uncinate-process controls (6)", "method": "芯片 · limma",
      "sig": "0", "note": "表达矩阵为线性尺度，已 log2(x+1) 转换；0 个 FDR 显著为数据本底。",
      "note_en": "Expression matrix was linear-scale, log2(x+1)-transformed; zero FDR-significant genes reflect the data background."},
@@ -569,8 +572,8 @@ SC_DATASETS = [
      "note_en": "Tuft signal (POU2F3/TRPM5) enriched in the ionocyte cluster; not forcibly split, annotated as-is."},
     {"id": "GSE324445", "cells": "30,954", "donors": "10", "design": "息肉6 / 外周血4",
      "design_en": "Polyps 6 / peripheral blood 4",
-     "caveat": "名义“分选 ILC2”，实测仅 36% 为真 ILC2、56% 为 CD4_T——网站展示实测组成，不用名义值。",
-     "caveat_en": "Nominally \u2018sorted ILC2\u2019; measured only 36% true ILC2 and 56% CD4_T \u2014 the site shows measured composition, not the nominal label."},
+     "caveat": "名义“分选 ILC2”：按统一注释实测仅 36% 的细胞为 ILC2、56% 为 CD4_T（细胞合并口径，30,954 个细胞、10 名供者；息肉样本内 14%、血样本内 60%）——网站展示实测组成，不用名义值。",
+     "caveat_en": "Nominally \u2018sorted ILC2\u2019; under the harmonised annotation only 36% of cells are ILC2 and 56% CD4_T (cell-pooled; 30,954 cells, 10 donors; 14% within polyp and 60% within blood samples) \u2014 the site shows measured composition, not the nominal label."},
     {"id": "GSE255544", "cells": "20,394", "donors": "4 供体单元（7 供体）", "donors_en": "4 donor units (7 donors)",
      "design": "CRSwNP 疾病单臂（淋巴细胞）",
      "design_en": "CRSwNP single arm (lymphocytes)",
@@ -884,7 +887,7 @@ WORKING_NAME = "PolypAtlas — CRSwNP Multi-modal Transcriptomic Resource"
 DISCLAIMER = f'<div class="disc" {dk("disc")}>{en_of("disc")}</div>'
 FOOTER = (f'<div class="footer">{WORKING_NAME} '
           f'· {VERSION} · '
-          f'<a href="https://doi.org/10.5281/zenodo.24300458">Zenodo release v1.7</a> · '
+          f'<a href="https://doi.org/10.5281/zenodo.24329815">Zenodo release v1.8</a> · '
           f'<a href="https://github.com/polypatlas/polypatlas/tree/main/analysis">analysis code</a> · '
           f'<span {dk("foot_src")}>{en_of("foot_src")}</span> · '
           f'<span {dk("foot_auth")}>{en_of("foot_auth")}</span></div>')
@@ -1214,6 +1217,7 @@ def build_downloads():
         ("literature_support.csv", "dl9_f6"),
         ("treatment_response.json", "dl9_f10"),
         ("reproduction_audit.csv", "dl_audit"),
+        ("fig5_composition_stats.csv", "dl_fig5stats"),
         ("strict_consensus.csv", "dl_strict"),
         ("primary_contrasts_inventory.csv", "dl_inventory"),
         ("sens198950_main9_consensus.csv", "dl_sens198950"),
@@ -1537,12 +1541,13 @@ def main():
     for src, dst in copies:
         shutil.copy(src, os.path.join(data_dir, dst))
 
-    # v1.7 download files (audit v1.7, strict-tissue sensitivity, DiD, round-3 sensitivities)
+    # v1.7/v1.8 download files (audit v1.8, strict-tissue sensitivity, DiD, round-3 sensitivities, Fig. 5 statistics)
     s6 = os.path.join(PROJ, "analysis", "step6_validation")
     sst = os.path.join(s2, "sensitivity_strict_tissue")
     sdid = os.path.join(s2, "did_dupilimab")
     for src, dst in [
-        (os.path.join(s6, "reproduction_audit_v1.7.csv"), "reproduction_audit.csv"),
+        (os.path.join(s6, "reproduction_audit_v1.8.csv"), "reproduction_audit.csv"),
+        (os.path.join(s3, "fig5_composition_stats_v1.8.csv"), "fig5_composition_stats.csv"),
         (os.path.join(s2, "sensitivity_gse198950_out", "main9_consensus.csv"), "sens198950_main9_consensus.csv"),
         (os.path.join(s2, "sensitivity_gse198950_out", "strict6_consensus.csv"), "sens198950_strict6_consensus.csv"),
         (os.path.join(s2, "sensitivity_gse36830_donor", "consensus_A_main9_no36830.csv"), "sens36830_excluded_consensus.csv"),

@@ -1,7 +1,7 @@
 # PolypAtlas analysis code
 
 This directory contains the analysis code that produced every result in the
-PolypAtlas resource and manuscript (release v1.6). It is released under the
+PolypAtlas resource and manuscript (release v1.8). It is released under the
 MIT licence (see `../LICENSE`). The website build code is in `../build/`.
 
 ## Conventions
@@ -35,6 +35,14 @@ MIT licence (see `../LICENSE`). The website build code is in `../build/`.
    `dl.py` (download), `pipeline.py` / `proc_*.py` (per-dataset processing and
    unified annotation), `stage2*.py`, `fin_276503.py`, `pb_de.R`
    (donor-level pseudobulk differential expression, edgeR).
+   - `rebuild_composition_v18.py` — release-v1.8 rebuild of
+     `composition_all.csv` from the annotated objects: restores the
+     `secretory_club` label that an earlier assembly had collapsed into
+     `secretory` (asserted one row per donor and class, fractions summing
+     to 1, and exact agreement with the previous table after summing the
+     two classes back); `fig5_stats_v18.R` — the Figure 5 composition
+     statistics (Kruskal–Wallis, Benjamini–Hochberg FDR across the 19
+     classes, Hodges–Lehmann effect estimates).
 3. **Spatial layer** — `step4_spatial/pipeline.R` (+ `fix1.R`).
 4. **Validation and the reproduction audit** — `step6_validation/`
    `step6_figures.R` (validation figures from the frozen result tables).

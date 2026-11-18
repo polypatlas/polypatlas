@@ -9,7 +9,7 @@ PolypAtlas is a curated, harmonized multi-modal transcriptomic resource for chro
 ## Contents
 
 - **Bulk transcriptomics:** 16 cohorts, 30 contrasts, 19,266 genes
-- **Single-cell RNA-seq:** 10 datasets, 476,254 cells, 105 donors
+- **Single-cell RNA-seq:** 10 datasets, 476,254 cells, 105 donor units
 - **Spatial transcriptomics (GeoMx):** polyp vs control tissue compartments
 - **Built-in validation:** marker direction recovery 87.5%; dupilumab reversal in 7 of 8 markers
 
