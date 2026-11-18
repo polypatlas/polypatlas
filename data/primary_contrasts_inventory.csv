@@ -3,7 +3,7 @@ GSE136825,GSE136825_polyp_vs_ctrl,whole tissue (polyp vs control inferior turbin
 GSE338426,GSE338426_CRSwNP_vs_ctrl,whole tissue,yes,14,8,RNA-seq,DESeq2 (raw_counts),runlog.csv + step2_report.md
 GSE179265,GSE179265_CRSwNP_vs_ctrl,whole tissue,yes,17,7,RNA-seq,DESeq2 (raw_counts),runlog.csv + step2_report.md
 GSE36830,GSE36830_CRSwNP_vs_UTctrl,whole tissue (NP vs uncinate/UT control),yes,12,6,microarray (Illumina-series linear values log2-transformed),limma,runlog.csv + step2_report.md
-GSE194282,GSE194282_NP_vs_ctrl,whole tissue (control incl. tumor-adjacent normal uncinate),yes,7,7,microarray (log2 normalized),limma,runlog.csv + step2_report.md
+GSE194282,GSE194282_NP_vs_ctrl,whole tissue (control uncinate from normal healthy controls),yes,7,7,microarray (log2 normalized),limma,runlog.csv + step2_report.md
 GSE69093,GSE69093_case_vs_ctrl_celltypeAdj,primary cultured cells (primary nasal epithelial + fibroblast component cells; cell-type adjusted),no,25,23,microarray (Illumina HT-12 GPL10558; log2 normalized),limma + covariate,runlog.csv + step2_report.md
 GSE313186,GSE313186_exposed_vs_ctrl,toxin-exposure design (deployment-exposed CRS vs unexposed controls),no,10,10,RNA-seq,DESeq2 (raw_counts),runlog.csv + step2_report.md
 GSE70898_70900,GSE70898_70900_polypT_vs_nasalT,sorted cells (polyp T cells vs nasal mucosa T cells; short-term explant culture; merged GSE70898 cases + GSE70900 controls),no,12,6,microarray (linear values log2-transformed),limma,runlog.csv + step2_report.md
