@@ -23,7 +23,7 @@ from datetime import date
 BASE = os.path.dirname(os.path.abspath(__file__))
 PROJ = os.path.dirname(os.path.dirname(BASE))  # ~/workspace/sci-crswnp-resource
 SITE = os.path.join(PROJ, "web", "site")
-VERSION = "v1.8"
+VERSION = "v1.9"
 BUILD_DATE = date.today().isoformat()
 
 # ================= i18n string registry: key -> (en, zh) =================
@@ -75,7 +75,7 @@ _def("idx_intro",
 _stat = [
     ("series_curated", "Curated GSE series", "策展 GSE 系列"),
     ("core", "Core set", "核心集"),
-    ("samples", "Total census samples", "普查样本总数"),
+    ("samples", "Total census samples (deposited; 1,937 human)", "普查样本总数（存入；人类 1,937）"),
     ("bulk_cohorts", "Bulk DE cohorts", "bulk 差异队列"),
     ("bulk_ev", "Bulk gene\u00d7cohort evidence", "bulk 基因×队列证据"),
     ("sc_ds", "Single-cell datasets", "单细胞数据集"),
@@ -98,7 +98,7 @@ _def("idx_sc",
      "<b>Single-cell</b>: unified annotation of 10 datasets (28-label cell vocabulary: 27 cell types + ambiguous); "
      "476,254 cells, 105 donor units; differential statistics at donor level (pseudobulk); "
      "17,631 genes \u00d7 41 contrasts.",
-     "<b>单细胞</b>：10 个数据集统一注释（27 标签细胞词表：26 种细胞型 + ambiguous），476,254 细胞、105 供体单元；差异统计以供体为单位（pseudobulk），17,631 基因×41 对比。")
+     "<b>单细胞</b>：10 个数据集统一注释（28 标签细胞词表：27 种细胞型 + ambiguous），476,254 细胞、105 供体单元；差异统计以供体为单位（pseudobulk），17,631 基因×41 对比。")
 _def("idx_sp",
      "<b>Spatial</b>: GSE235714 GeoMx, 40 ROIs (CD45+ immune / PanCK+ epithelial compartments), "
      "1,480-gene CTA panel \u2014 donor-level differential analysis found zero FDR&lt;0.05 genes in "
@@ -216,11 +216,11 @@ _dl = [
      "Analysis layer: per-cohort deconvolution group summary.",
      "分析层：逐队列去卷积分组汇总。"),
     ("dl8_can",
-     "Consensus genes (primary disease-contrast, 825 up / 196 down) with known approved-drug target annotation.",
-     "共识基因（主要疾病对比，825 上 / 196 下）附已获批药物靶点标注。"),
+     "Primary whole-tissue consensus genes (545 up / 225 down) with known approved-drug target annotation.",
+     "主要全组织共识基因（545 上 / 225 下）附已获批药物靶点标注。"),
     ("dl8_cen",
-     "Consensus genes: pathway enrichment of the up/down lists.",
-     "共识基因：上下调清单的通路富集。"),
+     "Primary whole-tissue consensus genes: pathway enrichment of the up/down lists.",
+     "主要全组织共识基因：上下调清单的通路富集。"),
     ("dl8_lr1",
      "Cell\u2013cell communication (CellChat, GSE235711; library-size normalised, release v1.6): CRSwNP vs control interaction comparison.",
      "细胞间通讯（CellChat，GSE235711；文库大小归一化，v1.6 版）：CRSwNP vs 对照互作比较。"),
@@ -277,8 +277,10 @@ _def("an_det", "Full enrichment tables (downloads page)", "完整富集表（见
 _def("gpw_t", "Pathways &amp; consensus", "通路与共识")
 _def("gpw_path", "Pathways containing this gene, enriched (FDR&lt;0.05) in \u22652 contrasts", "含该基因且在 \u22652 个对比中富集（FDR&lt;0.05）的通路")
 _def("gpw_cons", "Consensus list", "共识基因清单")
-_def("gpw_cons_up", "consensus UP (one of 825 genes up-regulated across cohorts)", "共识上调（跨队列上调 825 基因之一）")
-_def("gpw_cons_down", "consensus DOWN (one of 196 genes down-regulated across cohorts)", "共识下调（跨队列下调 196 基因之一）")
+_def("gpw_cons_up", "integrated-signature UP (one of 825 genes in the multi-context integrated signature)", "整合签名上调（多背景整合签名 825 基因之一）")
+_def("gpw_cons_down", "integrated-signature DOWN (one of 196 genes in the multi-context integrated signature)", "整合签名下调（多背景整合签名 196 基因之一）")
+_def("gpw_prim_up", "primary whole-tissue consensus UP (one of 545 genes)", "主要全组织共识上调（545 基因之一）")
+_def("gpw_prim_down", "primary whole-tissue consensus DOWN (one of 225 genes)", "主要全组织共识下调（225 基因之一）")
 _def("gpw_cons_no", "Not in the consensus list.", "不在共识基因清单中。")
 _def("gpw_target", "Known drug target", "已知药物靶点")
 _def("gpw_ncol", "contrasts", "对比数")
@@ -286,23 +288,29 @@ _def("gpw_ncol", "contrasts", "对比数")
 # --- v1.3: step-9 added-value layers (F1/F4/F3/F6) ---
 _def("nav_treatment", "Treatment response", "治疗反应")
 _def("dl_audit",
-     "Reproduction audit (release v1.8): 85 rows \u2014 every extracted claim with its grade, the claimed proposition, the measured quantity and their match.",
-     "复现审计（v1.8）：85 行——每条提取声称及其判级、原命题、实际量测与命题匹配。")
+     "Reproduction audit (release v1.9): 85 rows \u2014 every extracted claim with its grade, the claimed proposition, the measured quantity and their match.",
+     "复现审计（v1.9）：85 行——每条提取声称及其判级、原命题、实际量测与命题匹配。")
 _def("dl_fig5stats",
-     "Figure 5 composition statistics (release v1.8): per-class Kruskal\u2013Wallis p, Benjamini\u2013Hochberg FDR and Hodges\u2013Lehmann effect estimates for GSE235711.",
-     "图 5 组成统计（v1.8）：GSE235711 逐类 Kruskal\u2013Wallis p 值、Benjamini\u2013Hochberg FDR 与 Hodges\u2013Lehmann 效应估计。")
+     "Figure 5 composition statistics (release v1.9): per-class Kruskal\u2013Wallis p, Benjamini\u2013Hochberg FDR and Hodges\u2013Lehmann effect estimates for GSE235711.",
+     "图 5 组成统计（v1.9）：GSE235711 逐类 Kruskal\u2013Wallis p 值、Benjamini\u2013Hochberg FDR 与 Hodges\u2013Lehmann 效应估计。")
 _def("dl_sens198950",
-     "GSE198950-exclusion sensitivity (release v1.7): consensus lists recomputed without the tissue-site-confounded cohort (9 primary cohorts; 6 strict).",
-     "GSE198950 剔除敏感性（v1.7）：剔除组织部位混杂队列后重算的共识基因表（9 个主队列；6 个严格队列）。")
+     "GSE198950-exclusion sensitivity (release v1.7): consensus lists recomputed without the tissue-site-confounded cohort (9 signature contrasts; 6 whole-tissue).",
+     "GSE198950 剔除敏感性（v1.7）：剔除组织部位混杂队列后重算的共识基因表（9 个签名对比；6 个全组织）。")
 _def("dl_sens36830",
      "GSE36830 donor-handling sensitivity (release v1.7): consensus with the cohort excluded, consensus with its polyp-only contrast, and the marker-panel recount without the cohort.",
      "GSE36830 供者处理敏感性（v1.7）：整队列剔除共识、息肉单侧对比共识，以及剔除该队列后的标志物面板复算。")
 _def("dl_strict",
-     "Strict whole-tissue sensitivity: consensus gene list from the 7 whole-tissue cohorts (545 up / 225 down) with per-gene cohort support.",
-     "严格组织敏感性：7 个原组织队列的共识基因表（545 上调 / 225 下调）及逐基因队列支持。")
+     "Primary whole-tissue consensus: gene list from the 7 whole-tissue cohorts (545 up / 225 down) with per-gene cohort support.",
+     "主要全组织共识：7 个全组织队列的共识基因表（545 上调 / 225 下调）及逐基因队列支持。")
+_def("dl_sens136825",
+     "GSE136825 case-arm design sensitivity (release v1.9): three contrast designs for the largest cohort (pooled 75 vs 28; polyp-only 42 vs 28; polyp vs paired non-polyp turbinate 42 vs 33) with DEG counts and overlap against the frozen set.",
+     "GSE136825 病例臂设计敏感性（v1.9）：最大队列的三种对比设计（合并 75 vs 28；仅息肉 42 vs 28；息肉 vs 配对非息肉下鼻甲 42 vs 33）及与冻结集的 DEG 计数与重叠。")
+_def("dl_bootstrap",
+     "Cohort-cluster bootstrap for the DEG-yield vs sample-size correlation (release v1.9): per-contrast yield table and bootstrap result (r = -0.11, 95% CI [-0.53, +0.28]).",
+     "DEG 产出与样本量相关性的队列聚类 bootstrap（v1.9）：逐对比产出表与 bootstrap 结果（r = -0.11，95% CI [-0.53, +0.28]）。")
 _def("dl_inventory",
-     "Primary-contrast inventory: the 10 disease cohorts with design types and per-arm sample sizes.",
-     "主对比清单：10 个疾病队列的设计类型与每臂样本量。")
+     "Primary-contrast inventory: the 10 primary contrasts with design types and per-arm sample sizes.",
+     "主对比清单：10 个主对比的设计类型与每臂样本量。")
 _def("dl_did",
      "Dupilumab difference-in-differences (exploratory): genome-wide interaction table, the 8 markers, and the program-score test.",
      "Dupilumab 差值中的差值（探索性）：全基因组交互表、8 个标志物与程序评分检验。")
@@ -368,8 +376,8 @@ _def("t_inv_note",
      "仅列出实际跑过的对比。30 个 bulk 对比中没有类固醇、手术或其他临床治疗对比。")
 _def("t_drug_h", "Drug reversal candidates (in-silico hypothesis generation)", "药物逆转候选（纯计算假说生成）")
 _def("t_drug_method",
-     "Consensus signature (825 up / 196 down genes) queried against L1000CDS2 for compounds that reverse the signature; reported scores are the L1000CDS2 overlap scores. These are computational hypotheses, not experimental evidence of efficacy.",
-     "共识签名（825 上调 / 196 下调基因）在 L1000CDS2 中查询能逆转该签名的化合物；分数为 L1000CDS2  overlap 分数。这些是计算假说，非疗效实验证据。")
+     "Primary whole-tissue consensus signature (545 up / 225 down genes) queried against L1000CDS2 for compounds that reverse the signature; reported scores are the L1000CDS2 overlap scores. These are computational hypotheses, not experimental evidence of efficacy.",
+     "主要全组织共识签名（545 上调 / 225 下调基因）在 L1000CDS2 中查询能逆转该签名的化合物；分数为 L1000CDS2 overlap 分数。这些是计算假说，非疗效实验证据。")
 _def("t_cav",
      "\u26a0 Nasal brushing samples, not polyp tissue \u2014 cellular context differs from the polyp-resource core. Readout is marker-level mRNA reversal, not clinical endpoints (NPS, SNOT-22).",
      "\u26a0 鼻刷样本，非息肉组织——细胞构成与息肉资源核心不同。读数是标志物 mRNA 水平的逆转，非临床终点（NPS、SNOT-22）。")
@@ -382,8 +390,8 @@ _dl9 = [
      "Meta-analysis: per-cohort logFC and SE for the same genes (forest-plot input).",
      "Meta 分析：同上基因逐队列 logFC 与 SE（森林图输入）。"),
     ("dl9_f2",
-     "Drug reversal: L1000CDS2 hits for the consensus signature (top 50; in-silico hypothesis generation only).",
-     "药物逆转：共识签名的 L1000CDS2 命中（前 50；仅计算假说生成）。"),
+     "Drug reversal: L1000CDS2 hits for the primary whole-tissue consensus signature (top 50; in-silico hypothesis generation only).",
+     "药物逆转：主要全组织共识签名的 L1000CDS2 命中（前 50；仅计算假说生成）。"),
     ("dl9_f3",
      "Genetic annotation (related traits and proxy tissues): GWAS Catalog p\u22645e-8 hits for related traits and GTEx v8 significant variant\u2013gene pairs (q \u2264 0.05) per gene.",
      "遗传注释（相关性状与代理组织）：逐基因 GWAS Catalog 相关性状 p\u22645e-8 命中与 GTEx v8 显著变异\u2013基因对（q \u2264 0.05）。"),
@@ -402,10 +410,10 @@ _dl9 = [
 _def("m_flow_h", "Workflow", "流程")
 _mf = [
     ("m_f1",
-     "<b>Census &amp; curation</b>: each of the 66 human CRS / nasal-polyp GEO series (census of 1 October 2026) was individually "
+     "<b>Census &amp; curation</b>: each of the 66 GEO series containing human CRS / nasal-polyp data (census of 1 October 2026; 2,046 deposited samples, 1,937 of them human) was individually "
      "verified (tissue / grouping / platform / sample size) and graded core / pending / excluded with "
      "per-series evidence notes; endotype labels come only from deposited metadata, never inferred.",
-     "<b>普查与策展</b>：GEO 人类 CRS/鼻息肉查询 66 系列（2026 年 10 月 1 日普查）逐个验明（组织/分组/平台/样本量），定级 core/pending/excluded，逐条有证据注记；内型标签只采用数据集原始元数据，不作推测。"),
+     "<b>普查与策展</b>：含人类数据的 GEO CRS/鼻息肉系列 66 个（2026 年 10 月 1 日普查；存入样本 2,046，其中人类 1,937）逐个验明（组织/分组/平台/样本量），定级 core/pending/excluded，逐条有证据注记；内型标签只采用数据集原始元数据，不作推测。"),
     ("m_f2",
      "<b>Uniform bulk reanalysis</b>: independent differential analysis per cohort (counts \u2192 DESeq2; "
      "continuous values \u2192 limma; paired designs \u2192 paired models), preceded by a three-way scale "
@@ -417,7 +425,7 @@ _mf = [
      "28-label vocabulary (27 cell types + ambiguous; scored on the full gene matrix, not an HVG subset); positive-control "
      "assertions (housekeeping / epithelial / immune markers) must pass before results are released; "
      "differential statistics at donor level (pseudobulk).",
-     "<b>单细胞统一注释</b>：leiden 聚类 + 规范 marker 打分到统一 27 标签词表（26 种细胞型 + ambiguous；全基因矩阵打分，非 HVG 子集）；出结果前先过阳性对照断言（管家/上皮/免疫标志）；差异统计以供体为单位（pseudobulk）。"),
+     "<b>单细胞统一注释</b>：leiden 聚类 + 规范 marker 打分到统一 28 标签词表（27 种细胞型 + ambiguous；全基因矩阵打分，非 HVG 子集）；出结果前先过阳性对照断言（管家/上皮/免疫标志）；差异统计以供体为单位（pseudobulk）。"),
     ("m_f4",
      "<b>Spatial</b>: GeoMx organized by compartment; with 6-vs-4 donors no gene reaches FDR "
      "significance, so the spatial layer serves only as a compartment-localization/display layer, not "
@@ -483,8 +491,8 @@ _def("m_src_h", "Data sources", "数据来源")
 _def("m_src",
      "All data come from public GEO series (PMID and GEO links for each series are on the "
      "\u2018Cohorts &amp; datasets\u2019 page); the curation and reanalysis reports plus this site\u2019s "
-     "build scripts are public with the code repository, and every number on this site traces to a frozen result file in the data archive. Analysis code: <a href=\"https://github.com/polypatlas/polypatlas/tree/main/analysis\">github.com/polypatlas/polypatlas/tree/main/analysis</a> \u00b7 Data archive, release v1.8: <a href=\"https://doi.org/10.5281/zenodo.24329815\">Zenodo DOI 10.5281/zenodo.24329815</a> (concept DOI 10.5281/zenodo.23448779).",
-     "全部来自 GEO 公开系列（各系列 PMID 与 GEO 链接见“队列与数据集”页）；策展报告、重分析报告与本网站构建脚本随代码仓库公开，本站每个数字均可溯源至数据存档中的冻结结果文件。分析代码：<a href=\"https://github.com/polypatlas/polypatlas/tree/main/analysis\">github.com/polypatlas/polypatlas/tree/main/analysis</a> · 数据存档（v1.8 版）：<a href=\"https://doi.org/10.5281/zenodo.24329815\">Zenodo DOI 10.5281/zenodo.24329815</a>（概念 DOI 10.5281/zenodo.23448779）。")
+     "build scripts are public with the code repository, and every number on this site traces to a frozen result file in the data archive. Analysis code: <a href=\"https://github.com/polypatlas/polypatlas/tree/main/analysis\">github.com/polypatlas/polypatlas/tree/main/analysis</a> \u00b7 Data archive, release v1.9: <a href=\"https://doi.org/10.5281/zenodo.24357002\">Zenodo DOI 10.5281/zenodo.24357002</a> (concept DOI 10.5281/zenodo.23448779).",
+     "全部来自 GEO 公开系列（各系列 PMID 与 GEO 链接见“队列与数据集”页）；策展报告、重分析报告与本网站构建脚本随代码仓库公开，本站每个数字均可溯源至数据存档中的冻结结果文件。分析代码：<a href=\"https://github.com/polypatlas/polypatlas/tree/main/analysis\">github.com/polypatlas/polypatlas/tree/main/analysis</a> · 数据存档（v1.9 版）：<a href=\"https://doi.org/10.5281/zenodo.24357002\">Zenodo DOI 10.5281/zenodo.24357002</a>（概念 DOI 10.5281/zenodo.23448779）。")
 _def("m_auth_h", "Authors &amp; contact", "作者与联系")
 _def("m_auth",
      "Authors: Peiliang Lei, Wenrong Dong, Jingyi Tan, Xiaoying Yang \u00b7 Corresponding: Peiliang Lei (of@live.com) \u00b7 Cite this resource: Lei P, Dong W, Tan J, Yang X. PolypAtlas: a harmonised multi-modal transcriptomic resource integrating public bulk, single-cell and spatial transcriptomic data of chronic rhinosinusitis with nasal polyps. https://polyp.erbihou.org/ (data archive: Zenodo, DOI 10.5281/zenodo.23448779)",
@@ -494,7 +502,7 @@ _def("m_auth",
 # n / n_en: design strings for the static cohorts page + dynamic gene page
 # note / caveat (+ _en): shown next to the data (data-i18n keys generated below)
 BULK_COHORTS = [
-    {"id": "GSE136825", "n": "息肉(75) vs 对照下鼻甲(28)", "n_en": "Polyp (75) vs control inferior turbinate (28)", "method": "RNA-seq · DESeq2",
+    {"id": "GSE136825", "n": "CRSwNP 组织(75：42 息肉 + 33 配对非息肉下鼻甲) vs 对照下鼻甲(28)", "n_en": "CRSwNP tissue (75: 42 polyps + 33 paired non-polyp inferior turbinate) vs control inferior turbinate (28)", "method": "RNA-seq · DESeq2",
      "sig": "5,320", "note": "本资源中最大的 CRSwNP bulk 队列；阳性对照组合表现符合预期（CLC +3.87）。",
      "note_en": "The largest CRSwNP bulk cohort in this collection; positive-control panel behaves correctly (CLC +3.87)."},
     {"id": "GSE179265", "n": "CRSwNP(17) vs 健康对照(7)", "n_en": "CRSwNP (17) vs healthy controls (7)", "method": "RNA-seq · DESeq2",
@@ -775,6 +783,12 @@ def load_step8():
         g = (r.get("symbol") or r.get("gene") or "").strip().upper()
         if g:
             cons[g] = {"d": r.get("direction", ""), "t": r.get("known_target", "").strip()}
+    # v1.9: primary whole-tissue consensus membership (strict list)
+    s2b = os.path.join(PROJ, "analysis", "step2_bulk", "sensitivity_strict_tissue")
+    for r in read_csv_dict(os.path.join(s2b, "strict_consensus.csv")):
+        g = (r.get("gene") or "").strip().upper()
+        if g:
+            cons.setdefault(g, {"d": "", "t": ""})["p"] = r.get("direction", "")
     return ora, gsea, psum, dsum, cons
 
 def build_pathway_indices():
@@ -887,7 +901,7 @@ WORKING_NAME = "PolypAtlas — CRSwNP Multi-modal Transcriptomic Resource"
 DISCLAIMER = f'<div class="disc" {dk("disc")}>{en_of("disc")}</div>'
 FOOTER = (f'<div class="footer">{WORKING_NAME} '
           f'· {VERSION} · '
-          f'<a href="https://doi.org/10.5281/zenodo.24329815">Zenodo release v1.8</a> · '
+          f'<a href="https://doi.org/10.5281/zenodo.24357002">Zenodo release v1.9</a> · '
           f'<a href="https://github.com/polypatlas/polypatlas/tree/main/analysis">analysis code</a> · '
           f'<span {dk("foot_src")}>{en_of("foot_src")}</span> · '
           f'<span {dk("foot_auth")}>{en_of("foot_auth")}</span></div>')
@@ -1132,7 +1146,7 @@ def build_treatment():
                "<th>Method</th><th>Note</th></tr>" + irows + "</table>")
     # drug reversal table (top 50, in-silico only)
     drugs = []
-    with open(os.path.join(s9, "f2_drugs.csv")) as fh:
+    with open(os.path.join(s9, "f2_drugs_strict.csv")) as fh:
         for row in csv.DictReader(fh):
             drugs.append(row)
     drows = "".join(
@@ -1228,6 +1242,12 @@ def build_downloads():
         ("did_de.csv", "dl_did"),
         ("markers_did.csv", "dl_did"),
         ("program_score_did.csv", "dl_did"),
+        ("sens136825_design_summary.csv", "dl_sens136825"),
+        ("sens136825_design1_polyp42_vs_ctrl28.csv", "dl_sens136825"),
+        ("sens136825_design2_polyp42_vs_pairedIT33_unpaired.csv", "dl_sens136825"),
+        ("sens136825_design3_pooled75_vs_ctrl28.csv", "dl_sens136825"),
+        ("cluster_bootstrap_result.json", "dl_bootstrap"),
+        ("contrast_yield_table.csv", "dl_bootstrap"),
     ]
     # v1.3 download-label keys live in _dl9; register them as _STRINGS entries
     for k, en, zh in _dl9:
@@ -1256,7 +1276,7 @@ def gene_js_strings():
             "g_sc_t", "g_bulk_nm", "g_sc_nm", "g_sp_t", "g_cd45", "g_panck",
             "g_sp_cav", "g_notpanel", "g_lim_colon",
             "gpw_t", "gpw_path", "gpw_cons", "gpw_cons_up", "gpw_cons_down",
-            "gpw_cons_no", "gpw_target", "gpw_ncol", "path_th_term", "path_th_db",
+            "gpw_cons_no", "gpw_prim_up", "gpw_prim_down", "gpw_target", "gpw_ncol", "path_th_term", "path_th_db",
             "g_f1_t", "g_f1_combined", "g_f1_ci", "g_f1_p", "g_f1_i2", "g_f1_k",
             "g_f1_tau2", "g_f1_pi", "g_f1_loo",
             "g_f1_method", "g_f1_forest",
@@ -1319,7 +1339,10 @@ function searchGene(g0){
   } else html += '<p style="color:#888">—</p>';
   const cs = (typeof CONS!=='undefined') ? CONS[key] : null;
   html += '<p><b>'+gs('gpw_cons')+':</b> ';
-  if(cs){ html += (cs.d==='up' ? gs('gpw_cons_up') : gs('gpw_cons_down'));
+  if(cs){ var parts = [];
+    if(cs.d) parts.push(cs.d==='up' ? gs('gpw_cons_up') : gs('gpw_cons_down'));
+    if(cs.p) parts.push(cs.p==='up' ? gs('gpw_prim_up') : gs('gpw_prim_down'));
+    html += parts.length ? parts.join('<br>') : gs('gpw_cons_no');
     if(cs.t) html += ' · <span class="badge sig">'+gs('gpw_target')+': '+cs.t+'</span>';
   } else html += gs('gpw_cons_no');
   html += '</p></div>';
@@ -1515,7 +1538,7 @@ def main():
     for src, dst in [
         (os.path.join(s9, "meta_v2", "meta_extended.csv"), "meta_combined.csv"),
         (os.path.join(s9, "f1_meta_cohorts.csv"), "meta_percohort.csv"),
-        (os.path.join(s9, "f2_drugs.csv"), "drug_reversal_l1000cds2.csv"),
+        (os.path.join(s9, "f2_drugs_strict.csv"), "drug_reversal_l1000cds2.csv"),
         (os.path.join(s9, "f3_genetic.csv"), "genetic_support.csv"),
         (os.path.join(s9, "f4_coexpr.csv"), "coexpression_top10.csv"),
         (os.path.join(s9, "f6_lit.csv"), "literature_support.csv"),
@@ -1555,6 +1578,12 @@ def main():
         (os.path.join(s2, "sensitivity_gse36830_donor", "marker_panel_no36830.csv"), "sens36830_marker_panel.csv"),
         (os.path.join(sst, "strict_consensus.csv"), "strict_consensus.csv"),
         (os.path.join(sst, "primary_contrasts_inventory.csv"), "primary_contrasts_inventory.csv"),
+        (os.path.join(s2, "sensitivity_gse136825_designs", "design_summary.csv"), "sens136825_design_summary.csv"),
+        (os.path.join(s2, "sensitivity_gse136825_designs", "GSE136825_design1_polyp42_vs_ctrl28.csv"), "sens136825_design1_polyp42_vs_ctrl28.csv"),
+        (os.path.join(s2, "sensitivity_gse136825_designs", "GSE136825_design2_polyp42_vs_pairedIT33_unpaired.csv"), "sens136825_design2_polyp42_vs_pairedIT33_unpaired.csv"),
+        (os.path.join(s2, "sensitivity_gse136825_designs", "GSE136825_design3_pooled75_vs_ctrl28.csv"), "sens136825_design3_pooled75_vs_ctrl28.csv"),
+        (os.path.join(s2, "sensitivity_yield_bootstrap", "cluster_bootstrap_result.json"), "cluster_bootstrap_result.json"),
+        (os.path.join(s2, "sensitivity_yield_bootstrap", "contrast_yield_table.csv"), "contrast_yield_table.csv"),
         (os.path.join(sdid, "did_de.csv"), "did_de.csv"),
         (os.path.join(sdid, "markers_did.csv"), "markers_did.csv"),
         (os.path.join(sdid, "program_score_did.csv"), "program_score_did.csv"),
@@ -1570,8 +1599,8 @@ def main():
         ("programs/program_summary.csv", "program_summary.csv"),
         ("deconv/deconv_scores.csv", "deconv_scores.csv"),
         ("deconv/deconv_summary.csv", "deconv_summary.csv"),
-        ("consensus_annotated.csv", "consensus_annotated.csv"),
-        ("consensus_enrichment.csv", "consensus_enrichment.csv"),
+        ("consensus_annotated_strict.csv", "consensus_annotated.csv"),
+        ("consensus_enrichment_strict.csv", "consensus_enrichment.csv"),
         ("lr/cellchat_rerun_norm/lr_interactions_CRSwNP_vs_control_norm.csv", "lr_interactions_CRSwNP_vs_control.csv"),
         ("lr/cellchat_rerun_norm/lr_interactions_CRSsNP_vs_control_norm.csv", "lr_interactions_CRSsNP_vs_control.csv"),
     ]
