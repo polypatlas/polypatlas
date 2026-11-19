@@ -1,0 +1,4 @@
+"design","n_genes_tested","n_deg_fdr005","n_deg_up","n_deg_down","overlap_with_frozen_deg","direction_agreement_shared_deg"
+"iii_pooled75_vs_ctrl28_rerun",27540,5320,2725,2595,5320,1
+"i_polyp42_vs_ctrl28",26703,6114,3089,3025,4878,1
+"ii_polyp42_vs_pairedIT33_unpaired",26898,2017,947,1070,1348,0.998516320474777

@@ -1,0 +1,12 @@
+{
+ "n_contrasts": 30,
+ "n_cohorts": 16,
+ "pearson_r": -0.112,
+ "naive_p": 0.5558,
+ "bootstrap_reps": 10000,
+ "ci95": [
+  -0.53,
+  0.282
+ ],
+ "seed": 20261119
+}
